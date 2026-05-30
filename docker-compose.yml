@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
+    environment:
+    - JOBSCRAPER_REDIS_URL=redis://redis:6379/0
+    - JOBSCRAPER_LOG_LEVEL=INFO
+    - JOBSCRAPER_SCRAPE_INTERVAL_HOURS=6
+    - JOBSCRAPER_MAX_CONCURRENT_SCRAPERS=50
+    - JOBSCRAPER_JOB_TTL_SECONDS=86400
+    - PGSSLMODE=require  
+
+    volumes:
+      - ./companies.json:/app/companies.json:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  redis_data:

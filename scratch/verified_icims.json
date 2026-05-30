@@ -1,0 +1,416 @@
+[
+  {
+    "name": "HERE Technologies",
+    "base_url": "https://careers-here.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Cotiviti",
+    "base_url": "https://careers-cotiviti.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Clinton Health Access Initiative",
+    "base_url": "https://careers-chai.icims.com",
+    "status": "OK",
+    "count": 10
+  },
+  {
+    "name": "Teleperformance Engineering",
+    "base_url": "https://careerseng-teleperformance.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "IDC Careers (IDG)",
+    "base_url": "https://idccareers-idg.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "DMI Inc",
+    "base_url": "https://careers-dminc.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "FDM Field Services",
+    "base_url": "https://careers-fdmfieldservices.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Expleo IE",
+    "base_url": "https://expleo-jobs-ie-en.icims.com",
+    "status": "OK",
+    "count": 15
+  },
+  {
+    "name": "ERMCO ECI",
+    "base_url": "https://careers-french-ermcoeci.icims.com",
+    "status": "OK",
+    "count": 11
+  },
+  {
+    "name": "ISHPI Information Technologies",
+    "base_url": "https://careers-ishpi.icims.com",
+    "status": "OK",
+    "count": 16
+  },
+  {
+    "name": "Astoria",
+    "base_url": "https://careers-astoria.icims.com",
+    "status": "OK",
+    "count": 4
+  },
+  {
+    "name": "Teleperformance US",
+    "base_url": "https://careersus-teleperformance.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Benaroya Research Institute",
+    "base_url": "https://careers-benaroyaresearch.icims.com",
+    "status": "OK",
+    "count": 10
+  },
+  {
+    "name": "Hyland Software",
+    "base_url": "https://careers-hyland.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Newmarket",
+    "base_url": "https://careers-newmarket.icims.com",
+    "status": "OK",
+    "count": 12
+  },
+  {
+    "name": "Appalachian Regional Healthcare",
+    "base_url": "https://careers-arh.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "SAS Institute",
+    "base_url": "https://globalcareers-sas.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "WinCo Foods",
+    "base_url": "https://careers-winco.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Spence and Partners",
+    "base_url": "https://spenceandpartnerscareers-3173.icims.com",
+    "status": "OK",
+    "count": 3
+  },
+  {
+    "name": "URS Corporation",
+    "base_url": "https://careers-urs.icims.com",
+    "status": "OK",
+    "count": 4
+  },
+  {
+    "name": "University of St. Thomas",
+    "base_url": "https://studentemployment-stthomas.icims.com",
+    "status": "OK",
+    "count": 25
+  },
+  {
+    "name": "Sunrise Senior Living",
+    "base_url": "https://uscareers-sunriseseniorliving.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Advanced Drainage Systems",
+    "base_url": "https://careers-adspipe.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "DNDi",
+    "base_url": "https://careers-dndi.icims.com",
+    "status": "OK",
+    "count": 2
+  },
+  {
+    "name": "Marvin",
+    "base_url": "https://careers-marvin.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Uber University",
+    "base_url": "https://university-uber.icims.com",
+    "status": "OK",
+    "count": 10
+  },
+  {
+    "name": "Princeton Plasma Physics Lab",
+    "base_url": "https://pppl-princeton.icims.com",
+    "status": "OK",
+    "count": 17
+  },
+  {
+    "name": "BMC Jacksonville",
+    "base_url": "https://external-bmcjax.icims.com",
+    "status": "OK",
+    "count": 7
+  },
+  {
+    "name": "Accelerate Physical Therapy",
+    "base_url": "https://accelerate-pt-tptp.icims.com",
+    "status": "OK",
+    "count": 4
+  },
+  {
+    "name": "Centric Brands",
+    "base_url": "https://careers-centricbrands.icims.com",
+    "status": "OK",
+    "count": 10
+  },
+  {
+    "name": "Rural King",
+    "base_url": "https://careers-ruralking.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Prime Healthcare",
+    "base_url": "https://careers-primehealthcare.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Oriental Trading Company",
+    "base_url": "https://careers-orientaltrading.icims.com",
+    "status": "OK",
+    "count": 5
+  },
+  {
+    "name": "Utah State University",
+    "base_url": "https://careers-usu.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Intrastaff (Johns Hopkins)",
+    "base_url": "https://careers-intrastaff.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "SOS Children's Villages",
+    "base_url": "https://careers-sos-kd.icims.com",
+    "status": "OK",
+    "count": 15
+  },
+  {
+    "name": "CFA Supply",
+    "base_url": "https://careers-cfasupply.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Peel Region",
+    "base_url": "https://careers-peelregion.icims.com",
+    "status": "OK",
+    "count": 12
+  },
+  {
+    "name": "Electronic Therapy",
+    "base_url": "https://careers-electronic-therapy.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "VHC Health",
+    "base_url": "https://careers-vhchealth.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Highgate",
+    "base_url": "https://careershub-highgate.icims.com",
+    "status": "OK",
+    "count": 19
+  },
+  {
+    "name": "Lowes Foods",
+    "base_url": "https://careers-lowesfoods.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "OHSU",
+    "base_url": "https://careersat-ohsu.icims.com",
+    "status": "OK",
+    "count": 19
+  },
+  {
+    "name": "Bassett Healthcare",
+    "base_url": "https://learningexperiences-bassett.icims.com",
+    "status": "OK",
+    "count": 2
+  },
+  {
+    "name": "Thunder Bay",
+    "base_url": "https://internalen-thunderbay.icims.com",
+    "status": "OK_NO_CARDS",
+    "count": 0
+  },
+  {
+    "name": "Connections Health Solutions",
+    "base_url": "https://careers-connectionshs.icims.com",
+    "status": "OK",
+    "count": 7
+  },
+  {
+    "name": "Oak View Group",
+    "base_url": "https://teamwork-ovg.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Ed Morse Automotive Group",
+    "base_url": "https://careers-edmorse.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "BrightSpring Health Services",
+    "base_url": "https://careers-brightspring.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Ampact",
+    "base_url": "https://servicesite-ampact.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Lennox India",
+    "base_url": "https://indiacareers-lennox.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Artemis Gold",
+    "base_url": "https://careers-artemisgoldinc.icims.com",
+    "status": "OK",
+    "count": 18
+  },
+  {
+    "name": "Cajun Industries",
+    "base_url": "https://careers-cajunusa.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Penn Entertainment",
+    "base_url": "https://careersapply-pennentertainment.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "CoralTree Hospitality",
+    "base_url": "https://careers-coraltreehospitality.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Austin Texas EMS",
+    "base_url": "https://careers-austintexasems.icims.com",
+    "status": "OK",
+    "count": 3
+  },
+  {
+    "name": "Healthcare Services Group",
+    "base_url": "https://careers-hcsgcorp.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Piedmont Healthcare",
+    "base_url": "https://careers-piedmont.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "Peraton",
+    "base_url": "https://careers-peraton.icims.com",
+    "status": "OK",
+    "count": 50
+  },
+  {
+    "name": "SRI International",
+    "base_url": "https://careers-sri.icims.com",
+    "status": "OK",
+    "count": 34
+  },
+  {
+    "name": "LMI",
+    "base_url": "https://careers-lmi.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "TEKsystems",
+    "base_url": "https://careers-teksystems.icims.com",
+    "status": "OK",
+    "count": 20
+  },
+  {
+    "name": "Sutter Health",
+    "base_url": "https://careers-sutterhealth.icims.com",
+    "status": "OK_NO_CARDS",
+    "count": 0
+  },
+  {
+    "name": "Ascension",
+    "base_url": "https://careers-ascension.icims.com",
+    "status": "OK_NO_CARDS",
+    "count": 0
+  },
+  {
+    "name": "Sidley Austin",
+    "base_url": "https://careers-sidley.icims.com",
+    "status": "OK_NO_CARDS",
+    "count": 0
+  },
+  {
+    "name": "Ryder System",
+    "base_url": "https://careers-ryder.icims.com",
+    "status": "OK_NO_CARDS",
+    "count": 0
+  },
+  {
+    "name": "Aimbridge Hospitality",
+    "base_url": "https://careers-aimbridge.icims.com",
+    "status": "OK_NO_CARDS",
+    "count": 0
+  },
+  {
+    "name": "Vencore",
+    "base_url": "https://careers-vencore.icims.com",
+    "status": "OK_NO_CARDS",
+    "count": 0
+  },
+  {
+    "name": "Korn Ferry",
+    "base_url": "https://careers-kornferry.icims.com",
+    "status": "OK_NO_CARDS",
+    "count": 0
+  }
+]
