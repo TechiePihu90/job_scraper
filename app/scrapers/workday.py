@@ -151,7 +151,11 @@ class WorkdayScraper(BaseScraper):
         if not ext_id:
             return
 
-        detail_url = f"{host}/wday/cxs/{tenant}/{site_path}/jobs/{ext_id}"
+        # Workday detail endpoint is the singular "/job" path with the FULL
+        # externalPath (e.g. ".../JCI/job/Chicago-.../Title_WD123"). Using the
+        # plural "/jobs/{last-segment}" search path returns HTTP 422.
+        path = external_path if external_path.startswith("/") else "/" + external_path
+        detail_url = f"{host}/wday/cxs/{tenant}/{site_path}{path}"
 
         try:
             detail: object = await self._get(detail_url)
