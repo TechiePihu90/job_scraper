@@ -33,21 +33,50 @@ class ICIMSScraper(BaseScraper):
         async with async_playwright() as p:
             browser = None
             try:
-                browser = await p.chromium.launch(headless=True)
-                
+                # Launch with a few common flags to reduce headless detection
+                browser = await p.chromium.launch(
+                    headless=True,
+                    args=["--no-sandbox", "--disable-blink-features=AutomationControlled"],
+                )
+
+                # Use a dedicated context with a real-looking user-agent
+                context = await browser.new_context(user_agent=(
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                ))
+
+                # Basic anti-detection init script
+                await context.add_init_script("""
+                // Pass the webdriver check
+                Object.defineProperty(navigator, 'webdriver', {get: () => false});
+                // Languages
+                Object.defineProperty(navigator, 'languages', {get: () => ['en-US','en']});
+                // Plugins
+                Object.defineProperty(navigator, 'plugins', {get: () => [1,2,3,4,5]});
+                """)
+
                 while True:
                     # iCIMS page index starts at 0
                     url = f"{base.rstrip('/')}/jobs/search?pr={page_num}"
                     self.logger.info("iCIMS page %d: %s", page_num, url)
 
                     try:
-                        page = await browser.new_page()
+                        page = await context.new_page()
+                        # Add a lightweight init on the page level as well
+                        await page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => false});")
                         await page.goto(url, wait_until="networkidle", timeout=30000)
                         
-                        # Wait for job listings to load
+                        # Wait for job listings to load; detect human-verification pages
                         try:
+                            # quick check: page title can indicate a block (e.g., "Human Verification")
+                            title = (await page.title()).lower() or ""
+                            if "human verification" in title or "verify" in title:
+                                self.logger.error("iCIMS blocked by human verification on %s", url)
+                                await page.close()
+                                break
+
                             await page.wait_for_selector(".iCIMS_JobsTable .row", timeout=10000)
-                        except:
+                        except Exception:
                             self.logger.debug("No job listings found on page %d", page_num)
                             await page.close()
                             break
@@ -76,6 +105,11 @@ class ICIMSScraper(BaseScraper):
                         break
 
             finally:
+                try:
+                    if context:
+                        await context.close()
+                except Exception:
+                    pass
                 if browser:
                     await browser.close()
 

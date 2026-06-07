@@ -2778,6 +2778,399 @@
       "ats_type": "dayforce",
       "identifier": "kitepharma"
     }
-   
+    ,
+    {
+      "name": "Apple",
+      "ats_type": "workday",
+      "identifier": "apple/Apple",
+      "base_url": "https://apple.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Microsoft",
+      "ats_type": "workday",
+      "identifier": "microsoft/Microsoft",
+      "base_url": "https://microsoft.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Meta",
+      "ats_type": "workday",
+      "identifier": "meta/External",
+      "base_url": "https://meta.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Amazon",
+      "ats_type": "workday",
+      "identifier": "amazon/External",
+      "base_url": "https://amazon.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Google",
+      "ats_type": "workday",
+      "identifier": "google/External",
+      "base_url": "https://google.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Oracle",
+      "ats_type": "workday",
+      "identifier": "oracle/External_Career_Site",
+      "base_url": "https://oracle.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Coca-Cola",
+      "ats_type": "workday",
+      "identifier": "cocacola/External",
+      "base_url": "https://cocacola.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "PepsiCo",
+      "ats_type": "workday",
+      "identifier": "pepsico/External",
+      "base_url": "https://pepsico.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "McDonald's",
+      "ats_type": "workday",
+      "identifier": "mcdonalds/External",
+      "base_url": "https://mcdonalds.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Starbucks",
+      "ats_type": "workday",
+      "identifier": "starbucks/External",
+      "base_url": "https://starbucks.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Walgreens",
+      "ats_type": "workday",
+      "identifier": "walgreens/External",
+      "base_url": "https://walgreens.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Home Depot",
+      "ats_type": "workday",
+      "identifier": "homedepot/External",
+      "base_url": "https://homedepot.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Kellogg Company",
+      "ats_type": "workday",
+      "identifier": "kellogg/Kellogg",
+      "base_url": "https://kellogg.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Johnson Controls",
+      "ats_type": "workday",
+      "identifier": "johnsoncontrols/External",
+      "base_url": "https://johnsoncontrols.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Uber",
+      "ats_type": "workday",
+      "identifier": "uber/External",
+      "base_url": "https://uber.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Lyft",
+      "ats_type": "workday",
+      "identifier": "lyft/External",
+      "base_url": "https://lyft.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "FedEx",
+      "ats_type": "workday",
+      "identifier": "fedex/FedEx_Careers",
+      "base_url": "https://fedex.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "UPS",
+      "ats_type": "workday",
+      "identifier": "ups/External",
+      "base_url": "https://ups.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "General Electric",
+      "ats_type": "workday",
+      "identifier": "ge/External",
+      "base_url": "https://ge.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    }
+    ,
+    {
+      "name": "JPMorgan Chase",
+      "ats_type": "workday",
+      "identifier": "jpmorgan/External",
+      "base_url": "https://jpmorgan.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Goldman Sachs",
+      "ats_type": "workday",
+      "identifier": "goldmansachs/External",
+      "base_url": "https://goldmansachs.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Ford Motor Company",
+      "ats_type": "workday",
+      "identifier": "ford/Ford",
+      "base_url": "https://ford.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Marriott International",
+      "ats_type": "workday",
+      "identifier": "marriott/External",
+      "base_url": "https://marriott.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "United Airlines",
+      "ats_type": "workday",
+      "identifier": "united/External",
+      "base_url": "https://united.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Delta Air Lines",
+      "ats_type": "workday",
+      "identifier": "delta/External",
+      "base_url": "https://delta.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "T-Mobile",
+      "ats_type": "workday",
+      "identifier": "t-mobile/TMobile",
+      "base_url": "https://t-mobile.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Lockheed Martin",
+      "ats_type": "workday",
+      "identifier": "lockheed/External",
+      "base_url": "https://lockheed.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "S&P Global",
+      "ats_type": "workday",
+      "identifier": "spglobal/External",
+      "base_url": "https://spglobal.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Deloitte",
+      "ats_type": "workday",
+      "identifier": "deloitte/External",
+      "base_url": "https://deloitte.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "IKEA",
+      "ats_type": "workday",
+      "identifier": "ikea/External",
+      "base_url": "https://ikea.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Macy's",
+      "ats_type": "workday",
+      "identifier": "macys/External",
+      "base_url": "https://macys.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Publix",
+      "ats_type": "workday",
+      "identifier": "publix/External",
+      "base_url": "https://publix.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Chipotle",
+      "ats_type": "workday",
+      "identifier": "chipotle/External",
+      "base_url": "https://chipotle.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Tyson Foods",
+      "ats_type": "workday",
+      "identifier": "tyson/External",
+      "base_url": "https://tyson.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Siemens",
+      "ats_type": "workday",
+      "identifier": "siemens/External",
+      "base_url": "https://siemens.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "Northwell Health",
+      "ats_type": "workday",
+      "identifier": "northwell/NorthwellHealth",
+      "base_url": "https://northwell.wd5.myworkdayjobs.com",
+      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+    },
+    {
+      "name": "PagerDuty",
+      "ats_type": "greenhouse",
+      "identifier": "pagerduty"
+    },
+    {
+      "name": "Box",
+      "ats_type": "greenhouse",
+      "identifier": "box"
+    },
+    {
+      "name": "ServiceNow",
+      "ats_type": "greenhouse",
+      "identifier": "servicenow"
+    },
+    {
+      "name": "Expedia",
+      "ats_type": "greenhouse",
+      "identifier": "expedia"
+    },
+    {
+      "name": "Booking.com",
+      "ats_type": "greenhouse",
+      "identifier": "booking"
+    },
+    {
+      "name": "Tripadvisor",
+      "ats_type": "greenhouse",
+      "identifier": "tripadvisor"
+    },
+    {
+      "name": "Zynga",
+      "ats_type": "greenhouse",
+      "identifier": "zynga"
+    },
+    {
+      "name": "Electronic Arts",
+      "ats_type": "greenhouse",
+      "identifier": "ea"
+    },
+    {
+      "name": "NetApp",
+      "ats_type": "greenhouse",
+      "identifier": "netapp"
+    },
+    {
+      "name": "BlackRock",
+      "ats_type": "greenhouse",
+      "identifier": "blackrock"
+    },
+    {
+      "name": "State Farm",
+      "ats_type": "greenhouse",
+      "identifier": "statefarm"
+    },
+    {
+      "name": "Aetna",
+      "ats_type": "greenhouse",
+      "identifier": "aetna"
+    },
+    {
+      "name": "Groupon",
+      "ats_type": "greenhouse",
+      "identifier": "groupon"
+    },
+    {
+      "name": "Zocdoc",
+      "ats_type": "greenhouse",
+      "identifier": "zocdoc"
+    },
+    {
+      "name": "Roku",
+      "ats_type": "greenhouse",
+      "identifier": "roku"
+    },
+    {
+      "name": "Etsy",
+      "ats_type": "greenhouse",
+      "identifier": "etsy"
+    },
+    {
+      "name": "Chewy",
+      "ats_type": "greenhouse",
+      "identifier": "chewy"
+    },
+    {
+      "name": "Wayfair",
+      "ats_type": "greenhouse",
+      "identifier": "wayfair"
+    },
+    {
+      "name": "Nordic Semiconductor",
+      "ats_type": "greenhouse",
+      "identifier": "nordic"
+    },
+    {
+      "name": "CrowdStrike",
+      "ats_type": "greenhouse",
+      "identifier": "crowdstrike"
+    },
+    {
+      "name": "Okta Careers",
+      "ats_type": "greenhouse",
+      "identifier": "okta"
+    },
+    {
+      "name": "Samsara",
+      "ats_type": "greenhouse",
+      "identifier": "samsara"
+    },
+    {
+      "name": "Vercel",
+      "ats_type": "greenhouse",
+      "identifier": "vercel"
+    },
+    {
+      "name": "Fivetran",
+      "ats_type": "greenhouse",
+      "identifier": "fivetran"
+    },
+    {
+      "name": "Anthropic",
+      "ats_type": "greenhouse",
+      "identifier": "anthropic"
+    },
+    {
+      "name": "Stability AI",
+      "ats_type": "greenhouse",
+      "identifier": "stabilityai"
+    },
+    {
+      "name": "Epic Games",
+      "ats_type": "greenhouse",
+      "identifier": "epicgames"
+    },
+    {
+      "name": "Snowflake",
+      "ats_type": "greenhouse",
+      "identifier": "snowflake"
+    }
   ]
 }

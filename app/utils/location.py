@@ -87,15 +87,44 @@ def is_us_location(location_str: str | None) -> bool:
     if any(m in lower for m in non_us_markers):
         return False
 
-    # Remote - assume US if no non-us markers found (passed previous check)
-    if lower == "remote" or lower == "anywhere":
-        return True
-    
-    if "remote" in lower:
-        return True
+    # Remote: only accept as US if the location explicitly mentions the US.
+    # Generic "remote" or "anywhere" without a US marker should NOT be
+    # treated as US-only because remote roles may be offered outside the US.
+    if lower == "anywhere":
+        return False
 
-    # State abbreviation match (e.g., ", CA" or ", NY")
-    if _STATE_ABBREV_RE.search(text):
+    if "remote" in lower:
+        # Examples that should count as US: "Remote - US", "Remote (United States)",
+        # "Remote - USA", "Remote - U.S."
+        if "united states" in lower or ", us" in lower or lower.endswith(" us"):
+            return True
+        if "u.s.a" in lower or "usa" in lower or "u.s." in lower:
+            return True
+        # Otherwise do not assume remote == US
+        return False
+
+    # State abbreviation match (e.g., ", CA" or ", NY").
+    # Guard against two-letter ISO country codes returned in the
+    # `countryAlpha2Code` field (e.g., "IN" for India) which would
+    # otherwise collide with state abbreviations like "IN" (Indiana).
+    m = _STATE_ABBREV_RE.search(text)
+    if m:
+        abbrev = m.group(0).upper()
+
+        # If the matched abbrev appears at the end of the string (typical
+        # when Workday emits only the countryAlpha2Code), and there are no
+        # other clear US indicators (zip, full state name, major US city),
+        # treat it as a country code and only accept if it's explicitly US
+        # or a known US territory.
+        if re.search(r"[,:\s]" + re.escape(abbrev) + r"\s*$", text):
+            if _US_ZIP_RE.search(text) or any(state in lower for state in US_STATES) or any(city in lower for city in MAJOR_US_CITIES):
+                return True
+            # Accept only explicit US / US-territory codes when trailing
+            if abbrev in {"US", "DC", "PR", "GU", "VI"}:
+                return True
+            return False
+
+        # Otherwise (abbrev appears in-line), accept as a state abbrev
         return True
 
     # Full state name match
