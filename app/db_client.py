@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Any
 import asyncpg
 
@@ -14,20 +14,29 @@ logger = logging.getLogger(__name__)
 
 
 def parse_iso(dt_str: Optional[str]) -> Optional[datetime]:
-    """Parse ISO-8601 date string to naive or timezone-aware datetime."""
+    """Parse ISO-8601 date string to a timezone-aware (UTC) datetime.
+
+    Naive values (e.g. date-only "2026-06-09") are assumed to be UTC. Without
+    this, asyncpg treats a naive datetime as machine-local time and shifts it
+    when storing into the timestamptz column, corrupting posted_at/scraped_at.
+    """
     if not dt_str:
         return None
+    dt: Optional[datetime] = None
     try:
         # standard ISO format parsing
         if dt_str.endswith("Z"):
             dt_str = dt_str[:-1] + "+00:00"
-        return datetime.fromisoformat(dt_str)
+        dt = datetime.fromisoformat(dt_str)
     except Exception:
         try:
             # Fallback for common sub-second formats
-            return datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S.%f")
+            dt = datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S.%f")
         except Exception:
             return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt
 
 
 class DBClient:
@@ -83,11 +92,19 @@ class DBClient:
             scraped_at TIMESTAMP WITH TIME ZONE DEFAULT (now() AT TIME ZONE 'utc') NOT NULL
         );
 
+        -- first_seen_at: set once when a job is first discovered, never updated.
+        -- Drives the "recently added" feed (jobs new to us in the last N hours).
+        ALTER TABLE jobs ADD COLUMN IF NOT EXISTS first_seen_at TIMESTAMP WITH TIME ZONE;
+        UPDATE jobs SET first_seen_at = scraped_at WHERE first_seen_at IS NULL;
+
         -- Index for fetching jobs by company slug (routes filter)
         CREATE INDEX IF NOT EXISTS idx_jobs_company_slug ON jobs(company_slug);
 
         -- Index for global job feed pagination (sorted newest first)
         CREATE INDEX IF NOT EXISTS idx_jobs_scraped_at_desc ON jobs(scraped_at DESC);
+
+        -- Index for the recently-added feed (sorted newest-first by discovery time)
+        CREATE INDEX IF NOT EXISTS idx_jobs_first_seen_at_desc ON jobs(first_seen_at DESC);
 
         -- Index for filtering by company
         CREATE INDEX IF NOT EXISTS idx_jobs_company ON jobs(company);
@@ -111,8 +128,8 @@ class DBClient:
 
         sql = """
         INSERT INTO jobs (
-            job_id, title, company, company_slug, location, description, posted_at, apply_url, source_ats, scraped_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            job_id, title, company, company_slug, location, description, posted_at, apply_url, source_ats, scraped_at, first_seen_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
         ON CONFLICT (job_id) DO UPDATE SET
             title = EXCLUDED.title,
             company = EXCLUDED.company,
@@ -123,6 +140,7 @@ class DBClient:
             apply_url = EXCLUDED.apply_url,
             source_ats = EXCLUDED.source_ats,
             scraped_at = EXCLUDED.scraped_at;
+            -- first_seen_at intentionally NOT updated: it must stay at first discovery.
         """
         if self.pool is None:
             await self.connect()
@@ -132,8 +150,11 @@ class DBClient:
         async with self.pool.acquire() as conn:
             async with conn.transaction():
                 for job in jobs:
-                    scraped_dt = parse_iso(job.scraped_at) or datetime.utcnow()
+                    scraped_dt = parse_iso(job.scraped_at) or datetime.now(timezone.utc)
                     posted_dt = parse_iso(job.posted_at)
+                    # On first insert, discovery time = this scrape time. On
+                    # conflict the DB keeps the existing first_seen_at (see SQL).
+                    first_seen_dt = parse_iso(job.first_seen_at) or scraped_dt
                     try:
                         await conn.execute(
                             sql,
@@ -147,6 +168,7 @@ class DBClient:
                             job.apply_url,
                             job.source_ats,
                             scraped_dt,
+                            first_seen_dt,
                         )
                         success_count += 1
                     except Exception as e:
@@ -179,6 +201,39 @@ class DBClient:
         async with self.pool.acquire() as conn:
             rows = await conn.fetch(sql, limit, offset)
             return [self._row_to_job(r) for r in rows]
+
+    async def fetch_recent_jobs(self, days: float = 1.0, page: int = 1, limit: int = 25) -> list[Job]:
+        """Get jobs *posted* within the last `days`, newest-first.
+
+        Recency uses the ATS-reported posted_at (the source of truth) — timestamp
+        precision where the ATS provides it (greenhouse, lever), date precision
+        where it doesn't (Workday). Jobs without a posted_at are excluded. Ties
+        (same posted date) are broken by most-recently-seen (first_seen_at).
+        """
+        if self.pool is None:
+            await self.connect()
+
+        assert self.pool is not None
+        offset = (page - 1) * limit
+        sql = (
+            "SELECT * FROM jobs "
+            "WHERE posted_at >= now() - ($1 * interval '1 day') "
+            "ORDER BY posted_at DESC, first_seen_at DESC NULLS LAST "
+            "LIMIT $2 OFFSET $3"
+        )
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(sql, days, limit, offset)
+            return [self._row_to_job(r) for r in rows]
+
+    async def count_recent_jobs(self, days: float = 1.0) -> int:
+        """Count jobs posted within the last `days` (by ATS-reported posted_at)."""
+        if self.pool is None:
+            await self.connect()
+
+        assert self.pool is not None
+        sql = "SELECT count(*) FROM jobs WHERE posted_at >= now() - ($1 * interval '1 day')"
+        async with self.pool.acquire() as conn:
+            return await conn.fetchval(sql, days)
 
     async def fetch_jobs_by_company(self, company_slug: str, page: int = 1, limit: int = 25) -> list[Job]:
         """Get jobs for a specific company by slug."""
@@ -261,6 +316,7 @@ class DBClient:
         """Convert a database record row to a validated Job object."""
         posted_at_val = row["posted_at"].isoformat() if row["posted_at"] else None
         scraped_at_val = row["scraped_at"].isoformat() if row["scraped_at"] else datetime.utcnow().isoformat()
+        first_seen_val = row["first_seen_at"].isoformat() if row.get("first_seen_at") else None
 
         return Job(
             job_id=row["job_id"],
@@ -272,6 +328,7 @@ class DBClient:
             apply_url=row["apply_url"],
             source_ats=row["source_ats"],
             scraped_at=scraped_at_val,
+            first_seen_at=first_seen_val,
         )
 
 

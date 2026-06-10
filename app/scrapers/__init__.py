@@ -13,10 +13,12 @@ from app.scrapers.zoho_recruit import ZohoRecruitScraper
 from app.scrapers.clearcompany import ClearCompanyScraper
 from app.scrapers.usajobs import USAJobsScraper
 from app.scrapers.dayforce import DayforceScraper
+from app.scrapers.ashby import AshbyScraper
 
 SCRAPER_REGISTRY: dict[str, type] = {
     "greenhouse": GreenhouseScraper,
     "lever": LeverScraper,
+    "ashby": AshbyScraper,
     "workday": WorkdayScraper,
     "icims": ICIMSScraper,
     "taleo": TaleoScraper,

@@ -21,7 +21,11 @@ class Job(BaseModel):
     source_ats: str = Field(..., description="ATS platform name")
     scraped_at: str = Field(
         default_factory=lambda: datetime.utcnow().isoformat(),
-        description="Timestamp when the job was scraped",
+        description="Timestamp when the job was last scraped (refreshed on every run)",
+    )
+    first_seen_at: Optional[str] = Field(
+        default=None,
+        description="Timestamp when the job was first discovered (set once, drives the recent feed)",
     )
 
     def to_redis_key(self) -> str:

@@ -98,6 +98,21 @@ async def list_jobs(
     return jobs
 
 
+@app.get("/jobs/recent", response_model=list[Job])
+async def list_recent_jobs(
+    days: float = Query(default=1.0, gt=0, le=60, description="Look-back window in days. Standard values: 1 (24h), 3, 7, 14."),
+    page: int = Query(default=1, ge=1, description="Page number"),
+    limit: int = Query(default=25, ge=1, le=100, description="Results per page"),
+):
+    """Feed of jobs posted within the last `days`, newest-first.
+
+    Recency uses the ATS-reported posted date (the source of truth): timestamp
+    precision where the ATS provides it (greenhouse, lever), date precision for
+    Workday. Mirrors the standard "Date posted: last 24h / 3 / 7 / 14 days" filter.
+    """
+    return await db_client.fetch_recent_jobs(days=days, page=page, limit=limit)
+
+
 @app.get("/jobs/company/{company_slug}", response_model=list[Job])
 async def get_jobs_by_company(
     company_slug: str,

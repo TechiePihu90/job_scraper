@@ -37,7 +37,7 @@
     },
     {
       "name": "Spotify",
-      "ats_type": "greenhouse",
+      "ats_type": "lever",
       "identifier": "spotify"
     },
     {
@@ -172,12 +172,12 @@
     },
     {
       "name": "Notion",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "notion"
     },
     {
       "name": "Benchling",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "benchling"
     },
     {
@@ -207,12 +207,12 @@
     },
     {
       "name": "Jane Street",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "janestreet"
     },
     {
       "name": "Chime",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "chime"
     },
     {
@@ -221,18 +221,13 @@
       "identifier": "anduril"
     },
     {
-      "name": "Figma",
-      "ats_type": "lever",
-      "identifier": "figma"
-    },
-    {
       "name": "Scale AI",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "scaleai"
     },
     {
       "name": "Canva",
-      "ats_type": "lever",
+      "ats_type": "smartrecruiters",
       "identifier": "canva"
     },
     {
@@ -242,12 +237,12 @@
     },
     {
       "name": "Mercury",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "mercury"
     },
     {
       "name": "Deel",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "deel"
     },
     {
@@ -282,9 +277,8 @@
     },
     {
       "name": "Visa",
-      "ats_type": "workday",
-      "identifier": "visa/Visa_External_Careers",
-      "base_url": "https://visa.wd1.myworkdayjobs.com"
+      "ats_type": "smartrecruiters",
+      "identifier": "visa"
     },
     {
       "name": "HP Inc.",
@@ -294,9 +288,8 @@
     },
     {
       "name": "Western Digital",
-      "ats_type": "workday",
-      "identifier": "westerndigital/WDC",
-      "base_url": "https://westerndigital.wd1.myworkdayjobs.com"
+      "ats_type": "smartrecruiters",
+      "identifier": "westerndigital"
     },
     {
       "name": "Adobe",
@@ -353,6 +346,12 @@
       "base_url": "https://cisco.wd1.myworkdayjobs.com"
     },
     {
+      "name": "Cisco",
+      "ats_type": "workday",
+      "identifier": "cisco/Cisco_Careers",
+      "base_url": "https://cisco.wd5.myworkdayjobs.com"
+    },
+    {
       "name": "Dell",
       "ats_type": "workday",
       "identifier": "dell/External",
@@ -366,9 +365,8 @@
     },
     {
       "name": "Qualtrics",
-      "ats_type": "workday",
-      "identifier": "qualtrics/External",
-      "base_url": "https://qualtrics.wd1.myworkdayjobs.com"
+      "ats_type": "greenhouse",
+      "identifier": "qualtrics"
     },
     {
       "name": "Twitter (X)",
@@ -395,24 +393,16 @@
       "ats_type": "smartrecruiters",
       "identifier": "bosch"
     },
-    
     {
       "name": "TiVo",
       "ats_type": "jobvite",
       "identifier": "tivo"
     },
-    
     {
       "name": "Autodesk",
       "ats_type": "workday",
       "identifier": "autodesk/Ext",
       "base_url": "https://autodesk.wd1.myworkdayjobs.com"
-    },
-    {
-      "name": "Cisco",
-      "ats_type": "workday",
-      "identifier": "cisco/Cisco_Careers",
-      "base_url": "https://cisco.wd5.myworkdayjobs.com"
     },
     {
       "name": "HPE",
@@ -467,12 +457,6 @@
       "ats_type": "workday",
       "identifier": "ntrs/northerntrust",
       "base_url": "https://ntrs.wd1.myworkdayjobs.com"
-    },
-    {
-      "name": "Walmart",
-      "ats_type": "workday",
-      "identifier": "walmart/WalmartExternal",
-      "base_url": "https://walmart.wd5.myworkdayjobs.com"
     },
     {
       "name": "Target",
@@ -649,11 +633,6 @@
       "base_url": "https://conocophillips.wd1.myworkdayjobs.com"
     },
     {
-      "name": "TiVo",
-      "ats_type": "jobvite",
-      "identifier": "tivo"
-    },
-    {
       "name": "Tyler Technologies",
       "ats_type": "jobvite",
       "identifier": "tylertechnologies"
@@ -685,7 +664,7 @@
     },
     {
       "name": "Starkflow",
-      "ats_type": "jazzhr",
+      "ats_type": "smartrecruiters",
       "identifier": "starkflow"
     },
     {
@@ -864,18 +843,13 @@
       "identifier": "ssa"
     },
     {
-      "name": "DoorDash",
-      "ats_type": "bamboohr",
-      "identifier": "doordash"
-    },
-    {
       "name": "Zendesk",
       "ats_type": "bamboohr",
       "identifier": "zendesk"
     },
     {
       "name": "Coursera",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "coursera"
     },
     {
@@ -885,7 +859,7 @@
     },
     {
       "name": "CB Insights",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "cbinsights"
     },
     {
@@ -900,7 +874,7 @@
     },
     {
       "name": "BigCommerce",
-      "ats_type": "bamboohr",
+      "ats_type": "smartrecruiters",
       "identifier": "bigcommerce"
     },
     {
@@ -945,7 +919,7 @@
     },
     {
       "name": "Home Market Foods",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "homemarketfoods"
     },
     {
@@ -965,7 +939,7 @@
     },
     {
       "name": "JYSK",
-      "ats_type": "clearcompany",
+      "ats_type": "smartrecruiters",
       "identifier": "jysk"
     },
     {
@@ -975,12 +949,12 @@
     },
     {
       "name": "Incyte Corporation",
-      "ats_type": "clearcompany",
-      "identifier": "incyte"
+      "ats_type": "smartrecruiters",
+      "identifier": "incytecorporation"
     },
     {
       "name": "Market America",
-      "ats_type": "clearcompany",
+      "ats_type": "smartrecruiters",
       "identifier": "marketamerica"
     },
     {
@@ -1070,7 +1044,7 @@
     },
     {
       "name": "Openai",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "openai"
     },
     {
@@ -1090,7 +1064,7 @@
     },
     {
       "name": "Plaid",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "plaid"
     },
     {
@@ -1099,13 +1073,8 @@
       "identifier": "brex"
     },
     {
-      "name": "Rippling",
-      "ats_type": "greenhouse",
-      "identifier": "rippling"
-    },
-    {
       "name": "Zapier",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "zapier"
     },
     {
@@ -1159,24 +1128,9 @@
       "identifier": "cloudflare"
     },
     {
-      "name": "Zendesk",
-      "ats_type": "greenhouse",
-      "identifier": "zendesk"
-    },
-    {
       "name": "Intercom",
       "ats_type": "greenhouse",
       "identifier": "intercom"
-    },
-    {
-      "name": "Canva",
-      "ats_type": "greenhouse",
-      "identifier": "canva"
-    },
-    {
-      "name": "Atlassian",
-      "ats_type": "greenhouse",
-      "identifier": "atlassian"
     },
     {
       "name": "Square",
@@ -1187,11 +1141,6 @@
       "name": "Block",
       "ats_type": "greenhouse",
       "identifier": "block"
-    },
-    {
-      "name": "Coursera",
-      "ats_type": "greenhouse",
-      "identifier": "coursera"
     },
     {
       "name": "Udemy",
@@ -1224,34 +1173,9 @@
       "identifier": "automattic"
     },
     {
-      "name": "Netflix",
-      "ats_type": "lever",
-      "identifier": "netflix"
-    },
-    {
-      "name": "Shopify",
-      "ats_type": "lever",
-      "identifier": "shopify"
-    },
-    {
       "name": "Tesla",
       "ats_type": "lever",
       "identifier": "tesla"
-    },
-    {
-      "name": "Unity",
-      "ats_type": "lever",
-      "identifier": "unity"
-    },
-    {
-      "name": "Yelp",
-      "ats_type": "lever",
-      "identifier": "yelp"
-    },
-    {
-      "name": "Pinterest",
-      "ats_type": "lever",
-      "identifier": "pinterest"
     },
     {
       "name": "Eventbrite",
@@ -1260,42 +1184,37 @@
     },
     {
       "name": "Hackerone",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "hackerone"
     },
     {
-      "name": "Lever",
-      "ats_type": "lever",
-      "identifier": "lever"
-    },
-    {
       "name": "Gitlab",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "gitlab"
     },
     {
       "name": "Circleci",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "circleci"
     },
     {
       "name": "Docker",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "docker"
     },
     {
       "name": "Postman",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "postman"
     },
     {
       "name": "Algolia",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "algolia"
     },
     {
       "name": "Contentful",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "contentful"
     },
     {
@@ -1305,22 +1224,22 @@
     },
     {
       "name": "Mux",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "mux"
     },
     {
       "name": "Patreon",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "patreon"
     },
     {
       "name": "Calendly",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "calendly"
     },
     {
       "name": "Webflow",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "webflow"
     },
     {
@@ -1334,18 +1253,8 @@
       "identifier": "loom"
     },
     {
-      "name": "Figma",
-      "ats_type": "lever",
-      "identifier": "figma"
-    },
-    {
-      "name": "Notion",
-      "ats_type": "lever",
-      "identifier": "notion"
-    },
-    {
       "name": "Linear",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "linear"
     },
     {
@@ -1360,7 +1269,7 @@
     },
     {
       "name": "Carta",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "carta"
     },
     {
@@ -1380,23 +1289,18 @@
     },
     {
       "name": "Fullstory",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "fullstory"
     },
     {
       "name": "Amplitude",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "amplitude"
     },
     {
       "name": "Mixpanel",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "mixpanel"
-    },
-    {
-      "name": "Segment",
-      "ats_type": "lever",
-      "identifier": "segment"
     },
     {
       "name": "Snyk",
@@ -1404,13 +1308,8 @@
       "identifier": "snyk"
     },
     {
-      "name": "Datadog",
-      "ats_type": "lever",
-      "identifier": "datadog"
-    },
-    {
       "name": "Newrelic",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "newrelic"
     },
     {
@@ -1440,7 +1339,7 @@
     },
     {
       "name": "Wistia",
-      "ats_type": "bamboohr",
+      "ats_type": "ashby",
       "identifier": "wistia"
     },
     {
@@ -1450,17 +1349,17 @@
     },
     {
       "name": "Ramp",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "ramp"
     },
     {
       "name": "Snowflake",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "snowflake"
     },
     {
       "name": "Vanta",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "vanta"
     },
     {
@@ -1470,17 +1369,17 @@
     },
     {
       "name": "Sentry",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "sentry"
     },
     {
       "name": "Confluent",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "confluent"
     },
     {
       "name": "Cohere",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "cohere"
     },
     {
@@ -1499,18 +1398,13 @@
       "identifier": "weightsandbiases"
     },
     {
-      "name": "Anduril",
-      "ats_type": "greenhouse",
-      "identifier": "anduril"
-    },
-    {
       "name": "Gong",
-      "ats_type": "greenhouse",
+      "ats_type": "smartrecruiters",
       "identifier": "gong"
     },
     {
       "name": "Foursquare",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "foursquare"
     },
     {
@@ -1524,13 +1418,8 @@
       "identifier": "lucid"
     },
     {
-      "name": "Zoom",
-      "ats_type": "greenhouse",
-      "identifier": "zoom"
-    },
-    {
       "name": "Docusign",
-      "ats_type": "greenhouse",
+      "ats_type": "smartrecruiters",
       "identifier": "docusign"
     },
     {
@@ -1542,11 +1431,6 @@
       "name": "Glassdoor",
       "ats_type": "greenhouse",
       "identifier": "glassdoor"
-    },
-    {
-      "name": "Zillow",
-      "ats_type": "greenhouse",
-      "identifier": "zillow"
     },
     {
       "name": "Opendoor",
@@ -1570,12 +1454,12 @@
     },
     {
       "name": "Strava",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "strava"
     },
     {
       "name": "Whoop",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "whoop"
     },
     {
@@ -1595,7 +1479,7 @@
     },
     {
       "name": "Betterup",
-      "ats_type": "greenhouse",
+      "ats_type": "ashby",
       "identifier": "betterup"
     },
     {
@@ -1605,7 +1489,7 @@
     },
     {
       "name": "Lyra",
-      "ats_type": "greenhouse",
+      "ats_type": "smartrecruiters",
       "identifier": "lyra"
     },
     {
@@ -1615,7 +1499,7 @@
     },
     {
       "name": "Ro",
-      "ats_type": "greenhouse",
+      "ats_type": "lever",
       "identifier": "ro"
     },
     {
@@ -1700,7 +1584,7 @@
     },
     {
       "name": "Equinox",
-      "ats_type": "greenhouse",
+      "ats_type": "smartrecruiters",
       "identifier": "equinox"
     },
     {
@@ -1745,7 +1629,7 @@
     },
     {
       "name": "Rowhouse",
-      "ats_type": "greenhouse",
+      "ats_type": "smartrecruiters",
       "identifier": "rowhouse"
     },
     {
@@ -1755,7 +1639,7 @@
     },
     {
       "name": "Nintendo",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "nintendo"
     },
     {
@@ -1765,7 +1649,7 @@
     },
     {
       "name": "Babbel",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "babbel"
     },
     {
@@ -1785,7 +1669,7 @@
     },
     {
       "name": "Brainly",
-      "ats_type": "lever",
+      "ats_type": "ashby",
       "identifier": "brainly"
     },
     {
@@ -1795,7 +1679,7 @@
     },
     {
       "name": "Udacity",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "udacity"
     },
     {
@@ -1805,7 +1689,7 @@
     },
     {
       "name": "Datacamp",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "datacamp"
     },
     {
@@ -1825,7 +1709,7 @@
     },
     {
       "name": "Masterclass",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "masterclass"
     },
     {
@@ -1850,17 +1734,17 @@
     },
     {
       "name": "Ziprecruiter",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "ziprecruiter"
     },
     {
       "name": "Upwork",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "upwork"
     },
     {
       "name": "Fiverr",
-      "ats_type": "lever",
+      "ats_type": "smartrecruiters",
       "identifier": "fiverr"
     },
     {
@@ -1884,18 +1768,13 @@
       "identifier": "peopleperhour"
     },
     {
-      "name": "99designs",
-      "ats_type": "lever",
-      "identifier": "99designs"
-    },
-    {
       "name": "Designcrowd",
       "ats_type": "lever",
       "identifier": "designcrowd"
     },
     {
       "name": "Dribbble",
-      "ats_type": "lever",
+      "ats_type": "smartrecruiters",
       "identifier": "dribbble"
     },
     {
@@ -1975,7 +1854,7 @@
     },
     {
       "name": "Clara",
-      "ats_type": "lever",
+      "ats_type": "greenhouse",
       "identifier": "clara"
     },
     {
@@ -1987,12 +1866,6 @@
       "name": "Tinkercad",
       "ats_type": "lever",
       "identifier": "tinkercad"
-    },
-    {
-      "name": "Visa",
-      "ats_type": "workday",
-      "identifier": "visa/visa_careers",
-      "base_url": "https://visa.wd1.myworkdayjobs.com"
     },
     {
       "name": "Mastercard",
@@ -2025,12 +1898,6 @@
       "base_url": "https://exxonmobil.wd1.myworkdayjobs.com"
     },
     {
-      "name": "Pfizer",
-      "ats_type": "workday",
-      "identifier": "pfizer/Pfizer_Careers",
-      "base_url": "https://pfizer.wd1.myworkdayjobs.com"
-    },
-    {
       "name": "Merck",
       "ats_type": "workday",
       "identifier": "merck/Merck_Careers",
@@ -2050,7 +1917,7 @@
     },
     {
       "name": "Stytch",
-      "ats_type": "bamboohr",
+      "ats_type": "ashby",
       "identifier": "stytch"
     },
     {
@@ -2075,7 +1942,7 @@
     },
     {
       "name": "Squarespace",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "squarespace"
     },
     {
@@ -2100,22 +1967,22 @@
     },
     {
       "name": "Activecampaign",
-      "ats_type": "bamboohr",
+      "ats_type": "lever",
       "identifier": "activecampaign"
     },
     {
       "name": "Klaviyo",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "klaviyo"
     },
     {
       "name": "Iterable",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "iterable"
     },
     {
       "name": "Braze",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "braze"
     },
     {
@@ -2135,7 +2002,7 @@
     },
     {
       "name": "Airship",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "airship"
     },
     {
@@ -2150,7 +2017,7 @@
     },
     {
       "name": "Pubnub",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "pubnub"
     },
     {
@@ -2170,7 +2037,7 @@
     },
     {
       "name": "Bandwidth",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "bandwidth"
     },
     {
@@ -2180,7 +2047,7 @@
     },
     {
       "name": "Vonage",
-      "ats_type": "bamboohr",
+      "ats_type": "greenhouse",
       "identifier": "vonage"
     },
     {
@@ -2470,9 +2337,8 @@
     },
     {
       "name": "Connections Health Solutions",
-      "ats_type": "icims",
-      "identifier": "connectionshealthsolutions",
-      "base_url": "https://careers-connectionshs.icims.com/"
+      "ats_type": "greenhouse",
+      "identifier": "connectionshealthsolutions"
     },
     {
       "name": "Oak View Group",
@@ -2572,9 +2438,8 @@
     },
     {
       "name": "Sutter Health",
-      "ats_type": "icims",
-      "identifier": "sutterhealth",
-      "base_url": "https://careers-sutterhealth.icims.com/"
+      "ats_type": "smartrecruiters",
+      "identifier": "sutterhealth"
     },
     {
       "name": "Ascension",
@@ -2611,8 +2476,7 @@
       "ats_type": "icims",
       "identifier": "kornferry",
       "base_url": "https://careers-kornferry.icims.com/"
-    }
-,
+    },
     {
       "name": "GroupM",
       "ats_type": "jobvite",
@@ -2627,16 +2491,6 @@
       "name": "VON Canada",
       "ats_type": "jobvite",
       "identifier": "voncanada"
-    },
-    {
-      "name": "Accenture",
-      "ats_type": "dayforce",
-      "identifier": "accenture"
-    },
-    {
-      "name": "AT&T",
-      "ats_type": "dayforce",
-      "identifier": "att"
     },
     {
       "name": "American Airlines",
@@ -2657,11 +2511,6 @@
       "name": "Bristol Myers Squibb",
       "ats_type": "dayforce",
       "identifier": "bms"
-    },
-    {
-      "name": "Chevron",
-      "ats_type": "dayforce",
-      "identifier": "chevron"
     },
     {
       "name": "Costco",
@@ -2700,7 +2549,7 @@
     },
     {
       "name": "Flex",
-      "ats_type": "dayforce",
+      "ats_type": "greenhouse",
       "identifier": "flex"
     },
     {
@@ -2715,8 +2564,8 @@
     },
     {
       "name": "Gap Inc.",
-      "ats_type": "dayforce",
-      "identifier": "gap"
+      "ats_type": "smartrecruiters",
+      "identifier": "gapinc"
     },
     {
       "name": "Gilead Sciences",
@@ -2760,7 +2609,7 @@
     },
     {
       "name": "Jamf",
-      "ats_type": "dayforce",
+      "ats_type": "greenhouse",
       "identifier": "jamf"
     },
     {
@@ -2777,260 +2626,401 @@
       "name": "Kite Pharma",
       "ats_type": "dayforce",
       "identifier": "kitepharma"
-    }
-    ,
+    },
     {
       "name": "Apple",
       "ats_type": "workday",
       "identifier": "apple/Apple",
       "base_url": "https://apple.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Microsoft",
       "ats_type": "workday",
       "identifier": "microsoft/Microsoft",
       "base_url": "https://microsoft.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Meta",
       "ats_type": "workday",
       "identifier": "meta/External",
       "base_url": "https://meta.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Amazon",
       "ats_type": "workday",
       "identifier": "amazon/External",
       "base_url": "https://amazon.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Google",
       "ats_type": "workday",
       "identifier": "google/External",
       "base_url": "https://google.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Oracle",
       "ats_type": "workday",
       "identifier": "oracle/External_Career_Site",
       "base_url": "https://oracle.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Coca-Cola",
       "ats_type": "workday",
       "identifier": "cocacola/External",
       "base_url": "https://cocacola.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "PepsiCo",
       "ats_type": "workday",
       "identifier": "pepsico/External",
       "base_url": "https://pepsico.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "McDonald's",
       "ats_type": "workday",
       "identifier": "mcdonalds/External",
       "base_url": "https://mcdonalds.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Starbucks",
       "ats_type": "workday",
       "identifier": "starbucks/External",
       "base_url": "https://starbucks.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Walgreens",
       "ats_type": "workday",
       "identifier": "walgreens/External",
       "base_url": "https://walgreens.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Home Depot",
       "ats_type": "workday",
       "identifier": "homedepot/External",
       "base_url": "https://homedepot.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Kellogg Company",
       "ats_type": "workday",
       "identifier": "kellogg/Kellogg",
       "base_url": "https://kellogg.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
-    },
-    {
-      "name": "Johnson Controls",
-      "ats_type": "workday",
-      "identifier": "johnsoncontrols/External",
-      "base_url": "https://johnsoncontrols.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Uber",
-      "ats_type": "workday",
-      "identifier": "uber/External",
-      "base_url": "https://uber.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
-    },
-    {
-      "name": "Lyft",
-      "ats_type": "workday",
-      "identifier": "lyft/External",
-      "base_url": "https://lyft.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "ats_type": "smartrecruiters",
+      "identifier": "uber",
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "FedEx",
       "ats_type": "workday",
       "identifier": "fedex/FedEx_Careers",
       "base_url": "https://fedex.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
-    },
-    {
-      "name": "UPS",
-      "ats_type": "workday",
-      "identifier": "ups/External",
-      "base_url": "https://ups.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "General Electric",
       "ats_type": "workday",
       "identifier": "ge/External",
       "base_url": "https://ge.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
-    }
-    ,
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
+    },
     {
       "name": "JPMorgan Chase",
       "ats_type": "workday",
       "identifier": "jpmorgan/External",
       "base_url": "https://jpmorgan.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Goldman Sachs",
       "ats_type": "workday",
       "identifier": "goldmansachs/External",
       "base_url": "https://goldmansachs.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Ford Motor Company",
       "ats_type": "workday",
       "identifier": "ford/Ford",
       "base_url": "https://ford.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Marriott International",
       "ats_type": "workday",
       "identifier": "marriott/External",
       "base_url": "https://marriott.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "United Airlines",
       "ats_type": "workday",
       "identifier": "united/External",
       "base_url": "https://united.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Delta Air Lines",
       "ats_type": "workday",
       "identifier": "delta/External",
       "base_url": "https://delta.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "T-Mobile",
       "ats_type": "workday",
       "identifier": "t-mobile/TMobile",
       "base_url": "https://t-mobile.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Lockheed Martin",
       "ats_type": "workday",
       "identifier": "lockheed/External",
       "base_url": "https://lockheed.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "S&P Global",
       "ats_type": "workday",
       "identifier": "spglobal/External",
       "base_url": "https://spglobal.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Deloitte",
       "ats_type": "workday",
       "identifier": "deloitte/External",
       "base_url": "https://deloitte.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "IKEA",
       "ats_type": "workday",
       "identifier": "ikea/External",
       "base_url": "https://ikea.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Macy's",
       "ats_type": "workday",
       "identifier": "macys/External",
       "base_url": "https://macys.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Publix",
       "ats_type": "workday",
       "identifier": "publix/External",
       "base_url": "https://publix.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Chipotle",
       "ats_type": "workday",
       "identifier": "chipotle/External",
       "base_url": "https://chipotle.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Tyson Foods",
       "ats_type": "workday",
       "identifier": "tyson/External",
       "base_url": "https://tyson.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Siemens",
       "ats_type": "workday",
       "identifier": "siemens/External",
       "base_url": "https://siemens.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "Northwell Health",
       "ats_type": "workday",
       "identifier": "northwell/NorthwellHealth",
       "base_url": "https://northwell.wd5.myworkdayjobs.com",
-      "extra": {"locale": "en-US", "location_facet": ["United States"]}
+      "extra": {
+        "locale": "en-US",
+        "location_facet": [
+          "United States"
+        ]
+      }
     },
     {
       "name": "PagerDuty",
@@ -3044,7 +3034,7 @@
     },
     {
       "name": "ServiceNow",
-      "ats_type": "greenhouse",
+      "ats_type": "smartrecruiters",
       "identifier": "servicenow"
     },
     {
@@ -3119,7 +3109,7 @@
     },
     {
       "name": "Wayfair",
-      "ats_type": "greenhouse",
+      "ats_type": "smartrecruiters",
       "identifier": "wayfair"
     },
     {
@@ -3138,26 +3128,6 @@
       "identifier": "okta"
     },
     {
-      "name": "Samsara",
-      "ats_type": "greenhouse",
-      "identifier": "samsara"
-    },
-    {
-      "name": "Vercel",
-      "ats_type": "greenhouse",
-      "identifier": "vercel"
-    },
-    {
-      "name": "Fivetran",
-      "ats_type": "greenhouse",
-      "identifier": "fivetran"
-    },
-    {
-      "name": "Anthropic",
-      "ats_type": "greenhouse",
-      "identifier": "anthropic"
-    },
-    {
       "name": "Stability AI",
       "ats_type": "greenhouse",
       "identifier": "stabilityai"
@@ -3166,11 +3136,6 @@
       "name": "Epic Games",
       "ats_type": "greenhouse",
       "identifier": "epicgames"
-    },
-    {
-      "name": "Snowflake",
-      "ats_type": "greenhouse",
-      "identifier": "snowflake"
     }
   ]
 }

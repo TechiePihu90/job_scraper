@@ -170,6 +170,27 @@ class WorkdayScraper(BaseScraper):
         if desc:
             job.description = desc
 
+        posted = self._extract_posted_date(detail)
+        if posted:
+            job.posted_at = posted
+
+    @staticmethod
+    def _extract_posted_date(detail: dict) -> str | None:
+        """Extract the real ISO posting date from a Workday detail response.
+
+        The search/list API only returns a relative string ("Posted Today"),
+        which cannot be parsed into a date. The detail API exposes the real
+        date as jobPostingInfo.startDate (e.g. "2026-06-09").
+        """
+        for container_key in ("jobPostingInfo", "jobPosting"):
+            info = detail.get(container_key)
+            if isinstance(info, dict):
+                for key in ("startDate", "postedOnDate", "datePosted"):
+                    val = info.get(key)
+                    if isinstance(val, str) and val.strip():
+                        return val.strip()
+        return None
+
     def _extract_description(self, detail: dict) -> str:
         """
         Pull the richest job description from the detail API response.
@@ -258,17 +279,10 @@ class WorkdayScraper(BaseScraper):
         elif isinstance(work_type_raw, dict):
             work_type = (work_type_raw.get("descriptor") or "").strip()
 
-        posted_at: str | None = (
-            raw.get("postedOn")
-            or raw.get("postedOnDate")
-            or raw.get("datePosted")
-            or raw.get("createdDate")
-            or _safe_get(raw, "jobPostingInfo", "postedOn")
-            or _safe_get(raw, "jobPostingInfo", "postedOnDate")
-            or _safe_get(raw, "jobPostingInfo", "startDate")
-            or _safe_get(raw, "jobPosting", "postedOn")
-            or _safe_get(raw, "jobPosting", "postedOnDate")
-        )
+        # The Workday search/list API only exposes a relative string here
+        # (e.g. "Posted Today"), which is not a parseable date. The real
+        # posting date is read from the detail API in _enrich_description().
+        posted_at: str | None = None
 
         closes_at: str | None = (
             raw.get("closingDate")

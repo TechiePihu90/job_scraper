@@ -186,7 +186,13 @@ class GreenhouseScraper(BaseScraper):
         decoded_content = _decode_and_convert(raw_content)
         description = self.normalize_text(decoded_content)
 
-        posted_at: str | None = raw.get("updated_at") or raw.get("created_at")
+        # Prefer first_published (the real original posting date) over updated_at,
+        # which only reflects the last edit and makes stale jobs look freshly posted.
+        posted_at: str | None = (
+            raw.get("first_published")
+            or raw.get("created_at")
+            or raw.get("updated_at")
+        )
 
         apply_url: str = (
             raw.get("absolute_url")
