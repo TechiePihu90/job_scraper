@@ -9,3 +9,9 @@ venv/
 *.egg-info/
 dist/
 build/
+
+# backups and run artifacts
+*.bak
+*.orig
+scratch/*.json
+scratch/*.log
