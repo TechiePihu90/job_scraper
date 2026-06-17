@@ -6,8 +6,6 @@ import logging
 from datetime import datetime
 from typing import Optional, Any
 import asyncpg
-import hashlib
-import re
 
 from app.config import settings
 from app.models import Job
@@ -30,30 +28,6 @@ def parse_iso(dt_str: Optional[str]) -> Optional[datetime]:
             return datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S.%f")
         except Exception:
             return None
-
-
-def _normalize_text(s: Optional[str]) -> str:
-    """Lowercase, strip punctuation and collapse whitespace for stable fingerprinting."""
-    if not s:
-        return ""
-    s = s.lower().strip()
-    # replace punctuation with spaces, keep word characters and whitespace
-    s = re.sub(r"[^\w\s]", " ", s)
-    s = re.sub(r"\s+", " ", s)
-    return s
-
-
-def make_fingerprint(title: Optional[str], company: Optional[str], location: Optional[str], apply_url: Optional[str] = "") -> str:
-    """Create a deterministic SHA256 fingerprint from key fields."""
-    parts = [
-        _normalize_text(title),
-        # strip common company affixes to reduce false negatives
-        _normalize_text(company).replace(" inc", "").replace(" llc", "").replace(" ltd", ""),
-        _normalize_text(location),
-        _normalize_text(apply_url),
-    ]
-    raw = "|".join(p for p in parts if p)
-    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
 class DBClient:
@@ -98,7 +72,6 @@ class DBClient:
         -- Create jobs table
         CREATE TABLE IF NOT EXISTS jobs (
             job_id VARCHAR(255) PRIMARY KEY,
-            fingerprint VARCHAR(64),
             title VARCHAR(500) NOT NULL,
             company VARCHAR(255) NOT NULL,
             company_slug VARCHAR(255) NOT NULL,
@@ -123,8 +96,6 @@ class DBClient:
         CREATE INDEX IF NOT EXISTS idx_jobs_fts ON jobs USING gin(
             to_tsvector('english', coalesce(title, '') || ' ' || coalesce(description, ''))
         );
-        -- Unique index on fingerprint to help deduplication (ignore NULLs)
-        CREATE UNIQUE INDEX IF NOT EXISTS idx_jobs_fingerprint_unique ON jobs(fingerprint) WHERE fingerprint IS NOT NULL;
         """
         if self.pool is None:
             raise RuntimeError("Database client not connected")
@@ -140,10 +111,9 @@ class DBClient:
 
         sql = """
         INSERT INTO jobs (
-            job_id, fingerprint, title, company, company_slug, location, description, posted_at, apply_url, source_ats, scraped_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            job_id, title, company, company_slug, location, description, posted_at, apply_url, source_ats, scraped_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         ON CONFLICT (job_id) DO UPDATE SET
-            fingerprint = EXCLUDED.fingerprint,
             title = EXCLUDED.title,
             company = EXCLUDED.company,
             company_slug = EXCLUDED.company_slug,
@@ -165,16 +135,9 @@ class DBClient:
                     scraped_dt = parse_iso(job.scraped_at) or datetime.utcnow()
                     posted_dt = parse_iso(job.posted_at)
                     try:
-                        # compute fingerprint and check for an existing canonical job
-                        fingerprint = make_fingerprint(job.title, job.company, job.location, job.apply_url)
-
-                        existing = await conn.fetchrow("SELECT job_id FROM jobs WHERE fingerprint = $1", fingerprint)
-                        target_job_id = existing["job_id"] if existing else job.job_id
-
                         await conn.execute(
                             sql,
-                            target_job_id,
-                            fingerprint,
+                            job.job_id,
                             job.title,
                             job.company,
                             job.company_slug(),
@@ -246,20 +209,6 @@ class DBClient:
         conditions = []
         params = []
         param_idx = 1
-
-        def _normalize_param_local(v: Optional[str]) -> Optional[str]:
-            if v is None:
-                return None
-            s = v.strip()
-            if not s:
-                return None
-            if s.lower() in ("undefined", "null", "none"):
-                return None
-            return s
-
-        keyword = _normalize_param_local(keyword)
-        location = _normalize_param_local(location)
-        company = _normalize_param_local(company)
 
         if keyword:
             conditions.append(
