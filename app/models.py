@@ -23,6 +23,7 @@ class Job(BaseModel):
         default_factory=lambda: datetime.utcnow().isoformat(),
         description="Timestamp when the job was scraped",
     )
+    content_hash: Optional[str] = Field(default=None, description="SHA-256 content hash for deduplication")
 
     def to_redis_key(self) -> str:
         """Generate a deterministic Redis key for this job."""

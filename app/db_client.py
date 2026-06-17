@@ -9,6 +9,7 @@ import asyncpg
 
 from app.config import settings
 from app.models import Job
+from app.utils.content_hash import generate_content_hash
 
 logger = logging.getLogger(__name__)
 
@@ -77,6 +78,7 @@ class DBClient:
             company_slug VARCHAR(255) NOT NULL,
             location VARCHAR(255) NOT NULL,
             description TEXT DEFAULT '',
+            content_hash VARCHAR(64) NOT NULL,
             posted_at TIMESTAMP WITH TIME ZONE,
             apply_url TEXT NOT NULL,
             source_ats VARCHAR(100) NOT NULL,
@@ -96,6 +98,12 @@ class DBClient:
         CREATE INDEX IF NOT EXISTS idx_jobs_fts ON jobs USING gin(
             to_tsvector('english', coalesce(title, '') || ' ' || coalesce(description, ''))
         );
+
+        -- Ensure content_hash column exists for deduplication on upgrades
+        ALTER TABLE jobs ADD COLUMN IF NOT EXISTS content_hash VARCHAR(64);
+
+        -- Unique index on content_hash to prevent duplicate postings
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_jobs_content_hash_unique ON jobs(content_hash);
         """
         if self.pool is None:
             raise RuntimeError("Database client not connected")
@@ -111,8 +119,8 @@ class DBClient:
 
         sql = """
         INSERT INTO jobs (
-            job_id, title, company, company_slug, location, description, posted_at, apply_url, source_ats, scraped_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            job_id, title, company, company_slug, location, description, posted_at, apply_url, source_ats, scraped_at, content_hash
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
         ON CONFLICT (job_id) DO UPDATE SET
             title = EXCLUDED.title,
             company = EXCLUDED.company,
@@ -122,7 +130,8 @@ class DBClient:
             posted_at = EXCLUDED.posted_at,
             apply_url = EXCLUDED.apply_url,
             source_ats = EXCLUDED.source_ats,
-            scraped_at = EXCLUDED.scraped_at;
+            scraped_at = EXCLUDED.scraped_at,
+            content_hash = EXCLUDED.content_hash;
         """
         if self.pool is None:
             await self.connect()
@@ -135,6 +144,11 @@ class DBClient:
                     scraped_dt = parse_iso(job.scraped_at) or datetime.utcnow()
                     posted_dt = parse_iso(job.posted_at)
                     try:
+                        # Ensure content_hash exists for the job (compute if missing)
+                        if not getattr(job, "content_hash", None):
+                            job.content_hash = generate_content_hash(
+                                job.title, job.company_slug(), job.location, job.description
+                            )
                         await conn.execute(
                             sql,
                             job.job_id,
@@ -147,6 +161,7 @@ class DBClient:
                             job.apply_url,
                             job.source_ats,
                             scraped_dt,
+                            getattr(job, "content_hash", None),
                         )
                         success_count += 1
                     except Exception as e:
@@ -154,6 +169,20 @@ class DBClient:
 
         logger.info("Successfully persisted %d/%d jobs in Supabase", success_count, len(jobs))
         return success_count
+
+    async def content_hash_exists(self, content_hash: str) -> bool:
+        """Check whether a content_hash already exists in the jobs table."""
+        if not content_hash:
+            return False
+
+        if self.pool is None:
+            await self.connect()
+
+        assert self.pool is not None
+        sql = "SELECT 1 FROM jobs WHERE content_hash = $1 LIMIT 1"
+        async with self.pool.acquire() as conn:
+            val = await conn.fetchval(sql, content_hash)
+            return val is not None
 
     async def fetch_job(self, job_id: str) -> Optional[Job]:
         """Fetch a single job by its ID."""
@@ -272,6 +301,7 @@ class DBClient:
             apply_url=row["apply_url"],
             source_ats=row["source_ats"],
             scraped_at=scraped_at_val,
+            content_hash=row.get("content_hash"),
         )
 
 

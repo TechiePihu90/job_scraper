@@ -122,23 +122,7 @@ Edit `companies.json`:
 }
 ```
 
-### Supported ATS Types
 
-| ATS             | Status      | Identifier Format               |
-|-----------------|-------------|----------------------------------|
-| `greenhouse`    | ✅ Working  | Board token (e.g., `airbnb`)    |
-| `lever`         | ✅ Working  | Company slug (e.g., `netflix`)  |
-| `workday`       | ✅ Working  | `tenant/site_path` + `base_url` |
-| `icims`         | working      | Portal slug                     |
-| `taleo`         | 🔲 Scaffold | Section slug                    |
-| `successfactors`| 🔲 Scaffold | Instance ID                     |
-| `smartrecruiters`| 🔲 Scaffold | Company ID                     |
-| `jobvite`       | 🔲 Scaffold | Company slug                    |
-| `bamboohr`      | 🔲 Scaffold | Subdomain                       |
-| `jazzhr`        | 🔲 Scaffold | API key                         |
-| `zoho_recruit`  | 🔲 Scaffold | Portal ID                       |
-| `clearcompany`  | 🔲 Scaffold | Client slug                     |
-| `usajobs`       | 🔲 Scaffold | `usajobs` (uses API key)        |
 
 ---
 

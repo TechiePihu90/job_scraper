@@ -19,6 +19,7 @@ from app.utils.location import is_us_location
 from app.utils.it_titles import is_it_job
 from app.utils.rate_limiter import AsyncRateLimiter
 from app.utils.retry import retry_with_backoff
+from app.utils.content_hash import generate_content_hash
 
 logger = logging.getLogger(__name__)
 
@@ -201,12 +202,37 @@ class BaseScraper(ABC):
         else:
             final_jobs = us_jobs
         
-        # Persist permanently in Supabase database
+        # Persist permanently in Supabase database (best-effort)
         from app.db_client import db_client
-        db_stored = await db_client.upsert_jobs(final_jobs)
-        
-        # Cache in Redis
-        redis_stored = await self.redis.store_jobs(final_jobs)
+
+        # Compute content hashes and skip duplicates that already exist in DB
+        to_persist: list[Job] = []
+        for job in final_jobs:
+            ch = generate_content_hash(job.title, job.company_slug(), job.location, job.description)
+            job.content_hash = ch
+            try:
+                exists = await db_client.content_hash_exists(ch)
+            except Exception:
+                # If the DB check fails, be conservative and include the job for upsert
+                exists = False
+
+            if exists:
+                self.logger.debug("Skipping duplicate job by content_hash for %s: %s", self.company.name, job.job_id)
+            else:
+                to_persist.append(job)
+
+        try:
+            db_stored = await db_client.upsert_jobs(to_persist)
+        except Exception as exc:  # pragma: no cover - defensive logging
+            self.logger.error("DB upsert failed for %s: %s", self.company.name, exc, exc_info=True)
+            db_stored = 0
+
+        # Cache in Redis (always attempt, even if DB upsert failed)
+        try:
+            redis_stored = await self.redis.store_jobs(final_jobs)
+        except Exception as exc:  # pragma: no cover - defensive logging
+            self.logger.error("Redis caching failed for %s: %s", self.company.name, exc, exc_info=True)
+            redis_stored = 0
         
         self.logger.info(
             "✓ Completed %s: %d scraped → %d US → %d final → %d persisted → %d cached",
