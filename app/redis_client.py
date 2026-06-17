@@ -167,9 +167,24 @@ class RedisClient:
         raw_jobs = await self.pool.mget(*keys)
 
         filtered: list[Job] = []
-        kw_lower = keyword.lower() if keyword else None
-        loc_lower = location.lower() if location else None
-        comp_lower = company.lower() if company else None
+
+        def _normalize_param_local(v: str | None) -> str | None:
+            if v is None:
+                return None
+            s = v.strip()
+            if not s:
+                return None
+            if s.lower() in ("undefined", "null", "none"):
+                return None
+            return s
+
+        kw_norm = _normalize_param_local(keyword)
+        loc_norm = _normalize_param_local(location)
+        comp_norm = _normalize_param_local(company)
+
+        kw_lower = kw_norm.lower() if kw_norm else None
+        loc_lower = loc_norm.lower() if loc_norm else None
+        comp_lower = comp_norm.lower() if comp_norm else None
 
         for raw in raw_jobs:
             if raw is None:

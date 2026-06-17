@@ -55,13 +55,17 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+cors_kwargs = {
+    "allow_methods": ["*"],
+    "allow_headers": ["*"],
+}
+if settings.api_allowed_origin_regex:
+    cors_kwargs["allow_origin_regex"] = settings.api_allowed_origin_regex
+else:
+    cors_kwargs["allow_origins"] = settings.api_allowed_origins
+cors_kwargs["allow_credentials"] = settings.api_allow_credentials
+
+app.add_middleware(CORSMiddleware, **cors_kwargs)
 
 
 # ── Endpoints ────────────────────────────────────────────────────────────
@@ -85,11 +89,25 @@ async def list_jobs(
     limit: int = Query(default=25, ge=1, le=100, description="Results per page"),
 ):
     """List/search jobs with optional filters. Served directly from Redis."""
-    if keyword or location or company:
+    def _normalize_param(val: str | None) -> str | None:
+        if val is None:
+            return None
+        v = val.strip()
+        if not v:
+            return None
+        if v.lower() in ("undefined", "null", "none"):
+            return None
+        return v
+
+    kw = _normalize_param(keyword)
+    loc = _normalize_param(location)
+    comp = _normalize_param(company)
+
+    if kw or loc or comp:
         jobs = await redis_client.search_jobs(
-            keyword=keyword,
-            location=location,
-            company=company,
+            keyword=kw,
+            location=loc,
+            company=comp,
             page=page,
             limit=limit,
         )

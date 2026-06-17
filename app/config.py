@@ -28,6 +28,22 @@ class Settings(BaseSettings):
     api_port: int = Field(default=8000, description="FastAPI port")
     api_default_page_size: int = Field(default=25, description="Default pagination size")
     api_max_page_size: int = Field(default=100, description="Max pagination size")
+    # CORS
+    api_allowed_origins: list[str] = Field(
+        default_factory=lambda: ["*"],
+        description="List of allowed origins for CORS. Use ['*'] to allow all origins.",
+    )
+    api_allow_credentials: bool = Field(
+        default=False,
+        description="Whether to allow cookies/credentials in cross-origin requests.",
+    )
+    api_allowed_origin_regex: str | None = Field(
+        default=r"^https?://localhost(:\d+)?$",
+        description=(
+            "Optional regex to match allowed origins. If set, passed to CORSMiddleware's "
+            "allow_origin_regex and takes precedence over api_allowed_origins."
+        ),
+    )
 
     # External API keys
     usajobs_api_key: str = Field(default="", description="USAJOBS API key")
