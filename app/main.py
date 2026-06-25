@@ -74,7 +74,15 @@ async def health_check():
         "status": "ok" if redis_ok else "degraded",
         "redis": "connected" if redis_ok else "disconnected",
     }
-
+    
+@app.get("/")
+async def root():
+    return {
+        "message": "Welcome to Job Scraper API 🚀",
+        "docs": "/docs",
+        "jobs": "/jobs",
+        "stats": "/stats",
+    }
 
 @app.get("/jobs", response_model=list[Job])
 async def list_jobs(
