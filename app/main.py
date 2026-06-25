@@ -6,7 +6,7 @@ import asyncio
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
@@ -36,11 +36,11 @@ async def lifespan(app: FastAPI):
     # Warm up Redis cache using latest Supabase jobs
     await redis_client.warm_up_cache()
     
-    start_scheduler()
-    logger.info("Background scheduler started")
+    # start_scheduler()
+    # logger.info("Background scheduler started")
     yield
     # Shutdown
-    stop_scheduler()
+    # stop_scheduler()
     await redis_client.disconnect()
     await db_client.disconnect()
     logger.info("Shutdown complete")
@@ -129,7 +129,7 @@ async def get_stats():
 
 
 @app.post("/scrape")
-async def trigger_scrape():
-    """Manually trigger a full scrape run (async, returns when done)."""
-    result = await run_all()
-    return result
+async def trigger_scrape(background_tasks: BackgroundTasks):
+    """Trigger scrape in background — returns immediately."""
+    background_tasks.add_task(run_all)
+    return {"status": "started", "message": "Scraper running in background"}
