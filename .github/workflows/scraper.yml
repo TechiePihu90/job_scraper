@@ -1,18 +1,33 @@
 name: Run Scraper
-
 on:
   schedule:
-    # Har 6 ghante chalega
     - cron: '0 */6 * * *'
-
-  # Manually bhi run kar sakte ho
   workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Call Scraper API
+      - name: Wake up Render
         run: |
-          curl -X GET https://job-scraper-dc89.onrender.com/scrape
+          echo "Waking up Render..."
+          curl --max-time 120 --retry 5 --retry-delay 30 --retry-all-errors \
+               https://job-scraper-dc89.onrender.com/
+          echo "Render is awake, waiting 10s..."
+          sleep 10
+
+      - name: Run Scraper
+        run: |
+          echo "Calling scraper..."
+          RESPONSE=$(curl --max-time 300 --retry 3 --retry-delay 15 \
+                         --retry-all-errors --fail \
+                         -s -w "\nHTTP_STATUS:%{http_code}" \
+                         https://job-scraper-dc89.onrender.com/scrape)
+          echo "$RESPONSE"
+          HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS" | cut -d: -f2)
+          echo "HTTP Status: $HTTP_STATUS"
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "❌ Scraper failed with status $HTTP_STATUS"
+            exit 1
+          fi
+          echo "✅ Scraper ran successfully"
