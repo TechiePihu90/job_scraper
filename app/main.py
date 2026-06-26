@@ -13,7 +13,7 @@ from app.config import settings
 from app.db_client import db_client
 from app.models import Job
 from app.orchestrator import run_all
-
+from app.email_alert import send_error_email
 logging.basicConfig(
     level=getattr(logging, settings.log_level),
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -125,8 +125,19 @@ async def get_stats():
     return await db_client.get_stats()
 
 
+
 @app.post("/scrape")
-async def trigger_scrape():
-    """Trigger a full scrape run — waits until complete, then returns result."""
-    result = await run_all()
-    return result
+async def trigger_scrape(background_tasks: BackgroundTasks):
+    """Trigger scrape in background — returns immediately."""
+
+    async def scrape_with_alert():
+        try:
+            logger.info("🚀 Background scrape started")
+            result = await run_all()
+            logger.info("✅ Scrape complete: %s", result)
+        except Exception as exc:
+            logger.exception("❌ Scraper failed!")
+            await send_error_email(exc, context="run_all()")
+
+    background_tasks.add_task(scrape_with_alert)
+    return {"status": "started", "message": "Scraper running in background"}

@@ -35,18 +35,17 @@ class Settings(BaseSettings):
     companies_config_path: str = Field(default="companies.json", description="Path to companies config")
 
     # Supabase / Postgres Database
-    supabase_db_host: str = Field(default="db.luqxesqzcafilfkbpjod.supabase.co", description="Supabase DB Host")
+    supabase_db_host: str = Field(default="", description="Supabase DB Host")
     supabase_db_port: int = Field(default=5432, description="Supabase DB Port")
-    supabase_db_user: str = Field(default="postgres", description="Supabase DB User")
-    supabase_db_password: str = Field(default="wKs7UnJ9@FHklSDvh", description="Supabase DB Password")
-    supabase_db_name: str = Field(default="postgres", description="Supabase DB Name")
-    supabase_url: str = Field(default="https://luqxesqzcafilfkbpjod.supabase.co", description="Supabase Web URL")
-    supabase_service_key: str = Field(
-        default="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1cXhlc3F6Y2FmaWxma2Jwam9kIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTEwMDM3NywiZXhwIjoyMDk0Njc2Mzc3fQ.H9fEUj9_XlabayyO_yFyDDlMWRtxpjeJo6p5mqYaFQo",
-        description="Supabase service role JWT key",
-    )
+    supabase_db_user: str = Field(default="", description="Supabase DB User")
+    supabase_db_password: str = Field(default="", description="Supabase DB Password")
+    supabase_db_name: str = Field(default="", description="Supabase DB Name")
+    supabase_url: str = Field(default="", description="Supabase Web URL")
+    supabase_service_key: str = Field(default="", description="Supabase service role JWT key")
 
-    model_config = {"env_prefix": "JOBSCRAPER_", "env_file": ".env", "extra": "ignore"}
+    #Email alerts
+    resend_api_key: str = Field(default="", description="Resend API key")
+    alert_email_to: str = Field(default="", description="Receiver email address")
 
 
 settings = Settings()
