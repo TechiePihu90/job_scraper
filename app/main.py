@@ -49,7 +49,7 @@ app.add_middleware(
 )
 
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 async def health_check():
     """Check API and database health."""
     try:
@@ -60,7 +60,7 @@ async def health_check():
         }
     except Exception as exc:
         logger.exception("Database health check failed")
-        raise HTTPException(status_code=503, detail=str(exc)) from exc
+        raise HTTPException(status_code=503, detail=503) from exc
 
 
 @app.get("/")
