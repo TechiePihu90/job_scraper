@@ -25,10 +25,6 @@ class Job(BaseModel):
     )
     content_hash: Optional[str] = Field(default=None, description="SHA-256 content hash for deduplication")
 
-    def to_redis_key(self) -> str:
-        """Generate a deterministic Redis key for this job."""
-        return f"job:{self.job_id}"
-
     def company_slug(self) -> str:
         """Generate a URL-safe company slug."""
         return self.company.lower().replace(" ", "-").replace(".", "").replace(",", "")

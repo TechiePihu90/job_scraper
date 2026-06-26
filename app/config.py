@@ -7,12 +7,7 @@ from pydantic import Field
 class Settings(BaseSettings):
     """Central configuration for the job scraper system."""
 
-    # Redis
-    redis_url: str = Field(default="redis://localhost:6379/0", description="Redis connection URL")
-    redis_max_connections: int = Field(default=50, description="Max Redis connection pool size")
-
     # Scraping
-    job_ttl_seconds: int = Field(default=86400, description="TTL for job keys in Redis (24h)")
     max_concurrent_scrapers: int = Field(default=50, description="Max concurrent scraper tasks")
     scrape_it_only: bool = Field(default=False, description="Whether to filter for IT titles only")
     scrape_interval_hours: int = Field(default=6, description="Hours between scheduled scrapes")

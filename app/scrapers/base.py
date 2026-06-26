@@ -14,7 +14,6 @@ from bs4 import BeautifulSoup
 
 from app.config import settings
 from app.models import CompanyConfig, Job
-from app.redis_client import RedisClient
 from app.utils.location import is_us_location
 from app.utils.it_titles import is_it_job
 from app.utils.rate_limiter import AsyncRateLimiter
@@ -44,12 +43,10 @@ class BaseScraper(ABC):
         self,
         company: CompanyConfig,
         session: aiohttp.ClientSession,
-        redis: RedisClient,
         rate_limiter: AsyncRateLimiter,
     ) -> None:
         self.company = company
         self.session = session
-        self.redis = redis
         self.rate_limiter = rate_limiter
         self.logger = logging.getLogger(f"scraper.{self.ATS_NAME}.{company.name}")
 
@@ -227,20 +224,12 @@ class BaseScraper(ABC):
             self.logger.error("DB upsert failed for %s: %s", self.company.name, exc, exc_info=True)
             db_stored = 0
 
-        # Cache in Redis (always attempt, even if DB upsert failed)
-        try:
-            redis_stored = await self.redis.store_jobs(final_jobs)
-        except Exception as exc:  # pragma: no cover - defensive logging
-            self.logger.error("Redis caching failed for %s: %s", self.company.name, exc, exc_info=True)
-            redis_stored = 0
-        
         self.logger.info(
-            "✓ Completed %s: %d scraped → %d US → %d final → %d persisted → %d cached",
+            "✓ Completed %s: %d scraped → %d US → %d final → %d persisted",
             self.company.name,
             len(jobs),
             len(us_jobs),
             len(final_jobs),
             db_stored,
-            redis_stored,
         )
         return db_stored

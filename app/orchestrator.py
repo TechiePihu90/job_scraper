@@ -12,7 +12,6 @@ import aiohttp
 
 from app.config import settings
 from app.models import CompanyConfig
-from app.redis_client import redis_client
 from app.scrapers import SCRAPER_REGISTRY
 from app.utils.rate_limiter import AsyncRateLimiter
 
@@ -50,7 +49,6 @@ async def scrape_company(
         scraper = scraper_cls(
             company=company,
             session=session,
-            redis=redis_client,
             rate_limiter=rate_limiter,
         )
         return await scraper.run()
@@ -63,7 +61,6 @@ async def run_all(config_path: str | None = None) -> dict:
     if not companies:
         return {"status": "no_companies", "total_new_jobs": 0}
 
-    await redis_client.connect()
     semaphore = asyncio.Semaphore(settings.max_concurrent_scrapers)
     rate_limiter = AsyncRateLimiter(rate=settings.rate_limit_per_second)
 
