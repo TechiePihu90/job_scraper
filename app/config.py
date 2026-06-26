@@ -1,11 +1,17 @@
 """Application configuration loaded from environment variables."""
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
 
 
 class Settings(BaseSettings):
     """Central configuration for the job scraper system."""
+
+    model_config = SettingsConfigDict(
+        env_prefix="JOBSCRAPER_",
+        env_file=".env",
+        env_file_encoding="utf-8",
+    )
 
     # Scraping
     max_concurrent_scrapers: int = Field(default=50, description="Max concurrent scraper tasks")
@@ -14,7 +20,7 @@ class Settings(BaseSettings):
     request_timeout_seconds: int = Field(default=30, description="HTTP request timeout")
     max_retries: int = Field(default=3, description="Max retries per request")
     retry_base_delay: float = Field(default=1.0, description="Base delay in seconds for exponential backoff")
-
+    job_ttl_seconds: int = Field(default=86400, description="How long a job stays valid before expiring")
     # Rate limiting
     rate_limit_per_second: float = Field(default=5.0, description="Requests per second per domain")
 
@@ -42,7 +48,7 @@ class Settings(BaseSettings):
     supabase_db_name: str = Field(default="", description="Supabase DB Name")
     supabase_url: str = Field(default="", description="Supabase Web URL")
     supabase_service_key: str = Field(default="", description="Supabase service role JWT key")
-
+    
     #Email alerts
     resend_api_key: str = Field(default="", description="Resend API key")
     alert_email_to: str = Field(default="", description="Receiver email address")
