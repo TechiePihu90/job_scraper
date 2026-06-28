@@ -18,6 +18,7 @@ class ICIMSScraper(BaseScraper):
     """
 
     ATS_NAME = "icims"
+    USES_BROWSER = True
     PAGE_SIZE = 20
 
     async def scrape(self) -> list[Job]:

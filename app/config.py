@@ -14,7 +14,8 @@ class Settings(BaseSettings):
     )
 
     # Scraping
-    max_concurrent_scrapers: int = Field(default=50, description="Max concurrent scraper tasks")
+    max_concurrent_scrapers: int = Field(default=50, description="Max concurrent HTTP scraper tasks")
+    max_concurrent_browsers: int = Field(default=4, description="Max concurrent browser (Playwright) scrapers")
     scrape_it_only: bool = Field(default=False, description="Whether to filter for IT titles only")
     scrape_interval_hours: int = Field(default=6, description="Hours between scheduled scrapes")
     request_timeout_seconds: int = Field(default=30, description="HTTP request timeout")

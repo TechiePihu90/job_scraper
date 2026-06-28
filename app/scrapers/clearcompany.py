@@ -23,6 +23,7 @@ class ClearCompanyScraper(BaseScraper):
     """
 
     ATS_NAME = "clearcompany"
+    USES_BROWSER = True
 
     async def scrape(self) -> list[Job]:
         """Fetch jobs from ClearCompany using Playwright for JS rendering."""

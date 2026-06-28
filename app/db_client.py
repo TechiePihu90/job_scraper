@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 from datetime import datetime
 from typing import Optional, Any
@@ -52,7 +53,7 @@ class DBClient:
                 password=settings.supabase_db_password,
                 database=settings.supabase_db_name,
                 min_size=1,
-                max_size=3,
+                max_size=10,
                 timeout=30.0,
             )
             logger.info("Supabase connection pool initialized successfully")
@@ -102,8 +103,26 @@ class DBClient:
         -- Ensure content_hash column exists for deduplication on upgrades
         ALTER TABLE jobs ADD COLUMN IF NOT EXISTS content_hash VARCHAR(64);
 
-        -- Unique index on content_hash to prevent duplicate postings
-        CREATE UNIQUE INDEX IF NOT EXISTS idx_jobs_content_hash_unique ON jobs(content_hash);
+        -- A UNIQUE index on content_hash caused entire per-company upsert batches to
+        -- abort on the first hash collision (ON CONFLICT targets job_id, not content_hash),
+        -- silently dropping every remaining job in that batch. Replace it with a plain
+        -- index used only for lookups. Deduplication is handled by the job_id primary key.
+        DROP INDEX IF EXISTS idx_jobs_content_hash_unique;
+        CREATE INDEX IF NOT EXISTS idx_jobs_content_hash ON jobs(content_hash);
+
+        -- Per-run audit log so "is the scraper actually working?" is a SQL query,
+        -- not a guess. One row per scrape run.
+        CREATE TABLE IF NOT EXISTS scrape_runs (
+            id BIGSERIAL PRIMARY KEY,
+            started_at TIMESTAMP WITH TIME ZONE NOT NULL,
+            finished_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT (now() AT TIME ZONE 'utc'),
+            duration_seconds NUMERIC,
+            companies_total INT,
+            companies_with_jobs INT,
+            errors_count INT,
+            total_new_jobs INT,
+            summary JSONB
+        );
         """
         if self.pool is None:
             raise RuntimeError("Database client not connected")
@@ -139,16 +158,19 @@ class DBClient:
         assert self.pool is not None
         success_count = 0
         async with self.pool.acquire() as conn:
-            async with conn.transaction():
-                for job in jobs:
-                    scraped_dt = parse_iso(job.scraped_at) or datetime.utcnow()
-                    posted_dt = parse_iso(job.posted_at)
-                    try:
-                        # Ensure content_hash exists for the job (compute if missing)
-                        if not getattr(job, "content_hash", None):
-                            job.content_hash = generate_content_hash(
-                                job.title, job.company_slug(), job.location, job.description
-                            )
+            for job in jobs:
+                scraped_dt = parse_iso(job.scraped_at) or datetime.utcnow()
+                posted_dt = parse_iso(job.posted_at)
+                try:
+                    # Ensure content_hash exists for the job (compute if missing)
+                    if not getattr(job, "content_hash", None):
+                        job.content_hash = generate_content_hash(
+                            job.title, job.company_slug(), job.location, job.description
+                        )
+                    # Each row gets its own transaction/savepoint so a single bad row
+                    # (e.g. a value too long for a column) cannot abort the whole batch
+                    # and silently drop every job that follows it.
+                    async with conn.transaction():
                         await conn.execute(
                             sql,
                             job.job_id,
@@ -163,9 +185,9 @@ class DBClient:
                             scraped_dt,
                             getattr(job, "content_hash", None),
                         )
-                        success_count += 1
-                    except Exception as e:
-                        logger.error("Failed to upsert job %s into Supabase: %s", job.job_id, e)
+                    success_count += 1
+                except Exception as e:
+                    logger.error("Failed to upsert job %s into Supabase: %s", job.job_id, e)
 
         logger.info("Successfully persisted %d/%d jobs in Supabase", success_count, len(jobs))
         return success_count
@@ -285,6 +307,35 @@ class DBClient:
                 "company_wise": {r["company"]: r["count"] for r in company_rows},
                 "portal_wise": {r["source_ats"]: r["count"] for r in portal_rows},
             }
+
+    async def record_run(self, summary: dict) -> None:
+        """Persist one row in scrape_runs summarizing a scrape run (best-effort)."""
+        if self.pool is None:
+            await self.connect()
+
+        assert self.pool is not None
+        sql = """
+        INSERT INTO scrape_runs (
+            started_at, duration_seconds, companies_total,
+            companies_with_jobs, errors_count, total_new_jobs, summary
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+        """
+        try:
+            started_at = parse_iso(summary.get("started_at")) or datetime.utcnow()
+            async with self.pool.acquire() as conn:
+                await conn.execute(
+                    sql,
+                    started_at,
+                    summary.get("duration_seconds"),
+                    summary.get("companies_total"),
+                    summary.get("companies_with_jobs"),
+                    summary.get("errors_count"),
+                    summary.get("total_new_jobs"),
+                    json.dumps(summary),
+                )
+            logger.info("Recorded scrape run in scrape_runs")
+        except Exception as e:
+            logger.error("Failed to record scrape run: %s", e)
 
     def _row_to_job(self, row: asyncpg.Record) -> Job:
         """Convert a database record row to a validated Job object."""

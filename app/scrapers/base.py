@@ -33,6 +33,11 @@ class BaseScraper(ABC):
 
     ATS_NAME: str = "unknown"
 
+    # Scrapers that launch a real browser (Playwright) set this True so the
+    # orchestrator can throttle them on a separate, much smaller semaphore —
+    # spawning dozens of Chromium processes at once exhausts memory anywhere.
+    USES_BROWSER: bool = False
+
     DEFAULT_HEADERS = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "application/json, text/plain, */*",

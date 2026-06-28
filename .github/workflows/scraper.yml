@@ -1,4 +1,5 @@
 name: Run Scraper
+
 on:
   schedule:
     - cron: '0 */6 * * *'
@@ -7,31 +8,27 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
-      - name: Wake up Render
-        run: |
-          echo "Waking up Render..."
-          for i in {1..10}; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
-                     https://job-scraper-dc89.onrender.com/health)
-            echo "Attempt $i: HTTP $STATUS"
-            if [ "$STATUS" = "200" ]; then
-              echo "✅ Render is awake!"
-              sleep 5
-              break
-            fi
-            sleep 30
-          done
+      - uses: actions/checkout@v4
 
-      - name: Trigger Scraper
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-                   --max-time 15 \
-                   -X POST \
-                   https://job-scraper-dc89.onrender.com/scrape)
-          echo "Response: HTTP $STATUS"
-          if [ "$STATUS" != "200" ]; then
-            echo "❌ Failed to trigger"
-            exit 1
-          fi
-          echo "✅ Scraper triggered in background!"
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run scraper
+        env:
+          JOBSCRAPER_SUPABASE_DB_HOST: ${{ secrets.SUPABASE_DB_HOST }}
+          JOBSCRAPER_SUPABASE_DB_PORT: ${{ secrets.SUPABASE_DB_PORT }}
+          JOBSCRAPER_SUPABASE_DB_USER: ${{ secrets.SUPABASE_DB_USER }}
+          JOBSCRAPER_SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          JOBSCRAPER_SUPABASE_DB_NAME: ${{ secrets.SUPABASE_DB_NAME }}
+          JOBSCRAPER_USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
+          JOBSCRAPER_USAJOBS_USER_AGENT: ${{ secrets.USAJOBS_USER_AGENT }}
+        run: python -m app.orchestrator
